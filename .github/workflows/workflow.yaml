@@ -1,0 +1,20 @@
+name: Continuos Integration
+
+on: 
+  push:
+    branches:
+      master
+
+jobs:
+  continuos-integration:
+    runs-on: ubunto-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Using Node.jobs
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - name: run install
+        run: |
+          npm install
