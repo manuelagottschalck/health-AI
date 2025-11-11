@@ -3,10 +3,10 @@ const { loadAndTrain, toText, loadCSV, normalizeData } = require('../src/index')
 describe('Testando rede neural', () => {
   test('Deve atingir acurácia maior que 60%', async () => {
     // Treino
-    const { net } = await loadAndTrain('healthcare_dataset.csv');
+    const { net } = await loadAndTrain('db/healthcare_dataset.csv');
 
     // Teste
-    const testRows = await loadCSV('healthcare_dataset_test.csv');
+    const testRows = await loadCSV('db/healthcare_dataset_test.csv');
     const testData = normalizeData(testRows);
     console.log(testData);
     let acertos = 0;
