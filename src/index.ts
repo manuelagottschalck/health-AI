@@ -102,7 +102,7 @@ function normalizeData(dataset: PatientRow[]) {
 
 function toText(admissionTypeRaw: number) {
   if (admissionTypeRaw >= 0.35 && admissionTypeRaw < 0.60) return 'Routine';
-  if(admissionTypeRaw >= 0.1 && admissionTypeRaw < 0.35 ) return 'Elective'
+  if (admissionTypeRaw >= 0.0 && admissionTypeRaw < 0.35 ) return 'Elective';
   if (admissionTypeRaw >= 0.60 && admissionTypeRaw < 0.85) return 'Urgent';
   if (admissionTypeRaw >= 0.85) return 'Emergency';
   //return 'Unknown';
@@ -113,13 +113,14 @@ async function loadAndTrain(trainPath: string) {
   const trainingData = normalizeData(data);
 
   const net = new NeuralNetwork({
-    hiddenLayers: [8, 6],
+    gpu: false,
+    hiddenLayers: [9, 7],
   });
 
   net.train(trainingData, {
-    iterations: 300,
+    iterations: 1500,
     log: true,
-    logPeriod: 200,
+    logPeriod: 500,
     learningRate: 0.3,
   });
 
