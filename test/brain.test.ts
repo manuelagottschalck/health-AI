@@ -1,4 +1,4 @@
-const { loadAndTrain, toText, loadCSV, normalizeData } = require('../src/index');
+const { loadAndTrain, toText, loadCSV, normalizeData } = require('../src/neural');
 
 describe('Testando rede neural', () => {
   test('Deve atingir acurácia maior que 60%', async () => {

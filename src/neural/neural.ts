@@ -1,22 +1,7 @@
 const { NeuralNetwork } = require('brain.js');
 const csv = require('csv-parser');
 const fs = require('fs');
-
-interface PatientRow {
-  Name: string,
-  Age: Number,
-  Gender: string,
-  'Medical Condition': string;
-  'Date of Admission': string;
-  'Doctor': string;
-  'Hospital': string;
-  'Billing Amount': string;
-  'Room Number': string
-  'Admission Type': string;
-  'Discharge Date': string;
-  'Medication': string;
-  'Test Results': string;
-}
+import type { PatientRow } from './types';
 
 
 function loadCSV(filePath: string): Promise<PatientRow[]> {
@@ -29,7 +14,6 @@ function loadCSV(filePath: string): Promise<PatientRow[]> {
       .on('error', reject);
   });
 }
-
 
 function normalizeNumber(value: number, min: number, max: number) {
   return (value - min) / (max - min);
@@ -118,18 +102,18 @@ async function loadAndTrain(trainPath: string) {
   });
 
   net.train(trainingData, {
-    iterations: 1500,
+    iterations: 500,
     log: true,
     logPeriod: 500,
     learningRate: 0.3,
   });
 
-  return { net };
+  return net;
 }
 
 module.exports = {
   loadAndTrain,
   loadCSV,
   normalizeData,
-  toText,
+  toText
 };
